@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Page displaying 4 native dialogs">
+    <meta name="author" content="Samuel Liu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native Dialogs</title>
+    <link href="images/favicon.ico" rel="icon">
+    <script type="text/javascript" src="javascript/purify.js"></script>
+    <script type="module" defer>
+        import { onAlertPress, onConfirmPress, onPromptPress } from "./javascript/customdialog.js";
+        
+        // Set event listeners for the alert, confirm, prompt buttons
+        const alertButton = document.getElementById("alert-button");
+        alertButton.addEventListener("click", onAlertPress);
+        const confirmButton = document.getElementById("confirm-button");
+        confirmButton.addEventListener("click", onConfirmPress);
+        const promptButton = document.getElementById("prompt-button");
+        promptButton.addEventListener("click", onPromptPress);
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>Custom Dialogs</h1>
+        <div class="button-group">
+            <button id="alert-button">Alert</button>
+            <button id="confirm-button">Confirm</button>
+            <button id="prompt-button">Prompt</button>
+        </div>
+        <dialog id="custom-dialog"></dialog>
+        <output id="output"></output>
+    </main>
+</body>
+
+</html>
