@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Method Test Page">
+    <meta name="author" content="Samuel Liu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method Test</title>
+    <link href="images/favicon.ico" rel="icon">
+</head>
+
+<body>
+    <main>
+        <h1>Method Test</h1>
+        <form id="method_test_form">
+            <label for="record_id">Record ID</label>
+            <input type="number" name="record_id" id="record_id" value="101010"></input><br>
+
+            <label for="article_name">Article Name</label>
+            <input type="text" name="article_name" id="article_name" value="Sample Article"></input><br>
+
+            <label for="article_body">Article Body</label>
+            <textarea name="article_body" id="article_body" rows="5" cols="40"
+                placeholder="Enter article body here"></textarea><br>
+
+            <label for="upload_date">Date</label>
+            <input type="date" name="upload_date" id="upload_date" value="2023-03-07"></input><br>
+
+            <button type="button" id="postBtn">postBtn</button>
+            <button type="button" id="getBtn">getBtn</button>
+            <button type="button" id="putBtn">putBtn</button>
+            <button type="button" id="deleteBtn">deleteBtn</button>
+        </form>
+        <output id="response"></output>
+    </main>
+</body>
+
+<script>
+    const formElement = document.getElementById("method_test_form")
+
+    const postBtn = document.getElementById("postBtn");
+    postBtn.addEventListener("click", () => {
+        sendNetworkRequest("post")
+    });
+
+    const getBtn = document.getElementById("getBtn");
+    getBtn.addEventListener("click", () => {
+        sendNetworkRequest("get")
+    });
+
+    const putBtn = document.getElementById("putBtn");
+    putBtn.addEventListener("click", () => {
+        sendNetworkRequest("put")
+    });
+
+    const deleteBtn = document.getElementById("deleteBtn");
+    deleteBtn.addEventListener("click", () => {
+        sendNetworkRequest("delete")
+    });
+
+    function sendNetworkRequest(type) {
+        fetch(getFetchUrl(type), getFetchOptions(type))
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    }
+
+    function getFetchUrl(type) {
+        if (type == "post") {
+            return "https://httpbin.org/post";
+        } else if (type == "get") {
+            return "https://httpbin.org/get?" + getFormData().toString();
+        } else if (type == "put") {
+            return "https://httpbin.org/put";
+        } else if (type == "delete") {
+            return "https://httpbin.org/delete";
+        }
+    }
+
+    function getFetchOptions(type) {
+        if (type == "get") {
+            return {};
+        } else {
+            return {
+                method: type,
+                body: getFormData(),
+            };
+        }
+    }
+
+    function getFormData() {
+        const data = new URLSearchParams();
+        for (const pair of new FormData(formElement)) {
+            data.append(pair[0], pair[1]);
+        }
+        return data;
+    }
+</script>
+
+</html>
