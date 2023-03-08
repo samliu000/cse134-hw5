@@ -25,15 +25,21 @@
             <textarea name="article_body" id="article_body" rows="5" cols="40"
                 placeholder="Enter article body here"></textarea><br>
 
-            <label for="upload_date">Date</label>
-            <input type="date" name="upload_date" id="upload_date" value="2023-03-07"></input><br>
+            <input type="hidden" name="date_time" id="date_time"></input><br>
 
             <button type="button" id="postBtn">postBtn</button>
             <button type="button" id="getBtn">getBtn</button>
             <button type="button" id="putBtn">putBtn</button>
-            <button type="button" id="deleteBtn">deleteBtn</button>
+            <button type="button" id="deleteBtn">deleteBtn</button><br>
+
+            <input type="radio" id="fetch_radio" name="request_type" value="fetch" checked="checked"/>
+            <label for="fetch_radio">Send Request using fetch() api</label><br>
+
+            <input type="radio" id="xhr_radio" name="request_type" value="xhr" />
+            <label for="xhr_radio">Send Request using XMLHttpRequest api</label>
         </form>
         <output id="response"></output>
     </main>
 </body>
+
 </html>
