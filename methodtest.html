@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Method Test</title>
     <link href="images/favicon.ico" rel="icon">
+    <script type="text/javascript" src="javascript/methodtest.js" defer></script>
 </head>
 
 <body>
@@ -35,66 +36,4 @@
         <output id="response"></output>
     </main>
 </body>
-
-<script>
-    const formElement = document.getElementById("method_test_form")
-
-    const postBtn = document.getElementById("postBtn");
-    postBtn.addEventListener("click", () => {
-        sendNetworkRequest("post")
-    });
-
-    const getBtn = document.getElementById("getBtn");
-    getBtn.addEventListener("click", () => {
-        sendNetworkRequest("get")
-    });
-
-    const putBtn = document.getElementById("putBtn");
-    putBtn.addEventListener("click", () => {
-        sendNetworkRequest("put")
-    });
-
-    const deleteBtn = document.getElementById("deleteBtn");
-    deleteBtn.addEventListener("click", () => {
-        sendNetworkRequest("delete")
-    });
-
-    function sendNetworkRequest(type) {
-        fetch(getFetchUrl(type), getFetchOptions(type))
-            .then((response) => response.json())
-            .then((data) => console.log(data));
-    }
-
-    function getFetchUrl(type) {
-        if (type == "post") {
-            return "https://httpbin.org/post";
-        } else if (type == "get") {
-            return "https://httpbin.org/get?" + getFormData().toString();
-        } else if (type == "put") {
-            return "https://httpbin.org/put";
-        } else if (type == "delete") {
-            return "https://httpbin.org/delete";
-        }
-    }
-
-    function getFetchOptions(type) {
-        if (type == "get") {
-            return {};
-        } else {
-            return {
-                method: type,
-                body: getFormData(),
-            };
-        }
-    }
-
-    function getFormData() {
-        const data = new URLSearchParams();
-        for (const pair of new FormData(formElement)) {
-            data.append(pair[0], pair[1]);
-        }
-        return data;
-    }
-</script>
-
 </html>
