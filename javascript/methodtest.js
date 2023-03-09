@@ -38,7 +38,7 @@ function sendNetworkRequest(type) {
 
 // populates output field with the returned json data
 function populateOutput(data) {
-  outputElement.innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
+  outputElement.innerHTML = `<h2>Request Response</h2><pre>${JSON.stringify(data, null, 4)}</pre>`;
 }
 
 // gets the request url, for get requests, the form data is added to the url
