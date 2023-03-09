@@ -101,5 +101,5 @@ function initButtons() {
   });
 }
 
-// only initialize buttons once the DOM is loaded
-document.addEventListener("DOMContentLoaded", initButtons);
+// initialize buttons
+initButtons();
