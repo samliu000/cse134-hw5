@@ -27,7 +27,7 @@ export function sendNetworkRequest(type) {
       }
     };
     xhr.open(type, getRequestUrl(type));
-    if (type != "get") {
+    if (type != "get" && type != "delete") {
       xhr.send(getFormData());
     } else {
       xhr.send();
@@ -39,6 +39,10 @@ export function sendNetworkRequest(type) {
 function getFetchOptions(type) {
   if (type == "get") {
     return {};
+  } else if (type == "delete") {
+    return {
+      method: type,
+    };
   } else {
     return {
       method: type,
@@ -56,7 +60,7 @@ function getRequestUrl(type) {
   } else if (type == "put") {
     return "https://httpbin.org/put";
   } else if (type == "delete") {
-    return "https://httpbin.org/delete";
+    return "https://httpbin.org/delete?" + getFormData().toString();
   }
 }
 
